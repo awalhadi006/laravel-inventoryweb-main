@@ -11,6 +11,7 @@ use App\Http\Controllers\Admin\LapBarangMasukController;
 use App\Http\Controllers\Admin\LapStokBarangController;
 use App\Http\Controllers\Admin\LoginController;
 use App\Http\Controllers\Admin\MerkController;
+use App\Http\Controllers\Admin\ProposalController;
 use App\Http\Controllers\Admin\SatuanController;
 use App\Http\Controllers\Master\AksesController;
 use App\Http\Controllers\Master\AppreanceController;
@@ -28,7 +29,7 @@ use Illuminate\Support\Facades\Route;
 | routes are loaded by the RouteServiceProvider within a group which
 | contains the "web" middleware group. Now create something great!
 |
-*/
+ */
 
 // login admin
 Route::middleware(['preventBackHistory'])->group(function () {
@@ -96,6 +97,15 @@ Route::group(['middleware' => 'userlogin'], function () {
         Route::post('/admin/customer/proses_tambah/', [CustomerController::class, 'proses_tambah'])->name('customer.store');
         Route::post('/admin/customer/proses_ubah/{customer}', [CustomerController::class, 'proses_ubah']);
         Route::post('/admin/customer/proses_hapus/{customer}', [CustomerController::class, 'proses_hapus']);
+    });
+
+    Route::middleware(['checkRoleUser:/proposal,menu'])->group(function () {
+        // Proposal
+        Route::resource('/admin/proposal', ProposalController::class);
+        Route::get('/admin/proposal/show/', [ProposalController::class, 'show'])->name('proposal.getproposal');
+        Route::post('/admin/proposal/proses_tambah/', [ProposalController::class, 'proses_tambah'])->name('proposal.store');
+        Route::post('/admin/proposal/proses_ubah/{proposal}', [ProposalController::class, 'proses_ubah']);
+        Route::post('/admin/proposal/proses_hapus/{proposal}', [ProposalController::class, 'proses_hapus']);
     });
 
     Route::middleware(['checkRoleUser:/barang-masuk,submenu'])->group(function () {
