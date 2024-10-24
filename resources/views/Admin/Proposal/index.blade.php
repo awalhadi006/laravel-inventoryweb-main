@@ -44,9 +44,9 @@
                                 <th class="border-bottom-0">Status</th>
                                 <th class="border-bottom-0">Respon</th>
                                 <th class="border-bottom-0">Tanggal Direspon</th>
-                                <th class="border-bottom-0">Jumlah Uang</th>
+                                <th class="border-bottom-0">Jumlah Donasi</th>
                                 <th class="border-bottom-0">Keterangan</th>
-                                <th class="border-bottom-0" width="1%">Action</th>
+                                <th class="border-bottom-0" width="1%">Aksi</th>
                             </thead>
                             <tbody></tbody>
                         </table>
@@ -103,9 +103,7 @@
 
         var table;
         $(document).ready(function() {
-            $('.rupiah').mask("#.##0", {
-                reverse: true
-            });
+            $('.phone_us').mask('(000) 000-0000');
 
             //datatables
             table = $('#table-1').DataTable({
@@ -187,6 +185,10 @@
                         searchable: false
                     },
                 ],
+
+                "drawCallback": function(settings) {
+                    $('.phone_us').mask('(000) 000-0000');
+                }
 
             });
         });

@@ -20,7 +20,8 @@
                         </div>
                         <div class="form-group">
                             <label for="snotelp" class="form-label">No Telp</label>
-                            <input type="text" name="snotelp" class="form-control" placeholder="">
+                            <input type="text" name="snotelp" class="form-control" data-mask="0000-0000-00000"
+                                placeholder="">
                         </div>
                         <div class="form-group">
                             <label for="sentdate" class="form-label">Tanggal Dikirim</label>
@@ -38,7 +39,8 @@
                         </div>
                         <div class="form-group">
                             <label for="rnotelp" class="form-label">No Telp</label>
-                            <input type="text" name="rnotelp" class="form-control" placeholder="">
+                            <input type="text" name="rnotelp" class="form-control" data-mask="0000-0000-00000"
+                                placeholder="">
                         </div>
                         <div class="form-group mb-5">
                             <label for="status" class="form-label">Status</label>
@@ -111,11 +113,11 @@
         function submitForm() {
             const proposal = $("input[name='proposal']").val();
             const sender = $("input[name='sender']").val();
-            const snotelp = $("input[name='snotelp']").val();
+            const snotelp = $("input[name='snotelp']").val().replace(/\-/g, '');
             const sentdate = $("input[name='sentdate']").val();
             const recipient = $("input[name='recipient']").val();
             const address = $("textarea[name='address']").val();
-            const rnotelp = $("input[name='rnotelp']").val();
+            const rnotelp = $("input[name='rnotelp']").val().replace(/\-/g, '');
             const status = $("select[name='status']").val();
             const response = $("select[name='response']").val();
             const responsedate = $("input[name='responsedate']").val();

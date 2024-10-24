@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use App\Models\Admin\AksesModel;
 use App\Models\Admin\ProposalModel;
+use App\Traits\HasFormatNomor;
 use App\Traits\HasFormatRupiah;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
@@ -14,6 +15,7 @@ use Yajra\DataTables\Facades\DataTables;
 class ProposalController extends Controller
 {
     use HasFormatRupiah;
+    use HasFormatNomor;
     public function index()
     {
         $data["title"] = "Proposal";
@@ -27,26 +29,29 @@ class ProposalController extends Controller
             $data = ProposalModel::orderBy('proposal_id', 'DESC')->get();
             return DataTables::of($data)
                 ->addIndexColumn()
-                ->addColumn('notelp', function ($row) {
-                    $notelp = $row->proposal_recipient_notelp == '' ? '-' : $row->proposal_recipient_notelp;
+                ->addColumn('proposal_recipient_notelp', function ($row) {
+                    $rnotelp = $row->proposal_recipient_notelp == '' ? '-' : $row->proposal_recipient_notelp;
 
-                    return $notelp;
+                    return $rnotelp;
                 })
                 ->addColumn('alamat', function ($row) {
                     $alamat = $row->proposal_recipient_address == '' ? '-' : $row->proposal_recipient_address;
 
                     return $alamat;
                 })
+
                 ->addColumn('proposal_sent_date', function ($row) {
                     $sent_date = $row->proposal_sent_date == '' ? '-' : Carbon::parse($row->proposal_sent_date)->translatedFormat('d F Y');
 
                     return $sent_date;
                 })
+
                 ->addColumn('proposal_response_date', function ($row) {
                     $resp_date = $row->proposal_response_date == '' ? '-' : Carbon::parse($row->proposal_response_date)->translatedFormat('d F Y');
 
                     return $resp_date;
                 })
+
                 ->addColumn('action', function ($row) {
                     $array = array(
                         "proposal_id" => $row->proposal_id,
@@ -90,10 +95,16 @@ class ProposalController extends Controller
                     }
                     return $button;
                 })
-                ->editColumn('proposal_amount_received', function ($row) {
-                    return $this->formatRupiah($row->proposal_amount_received);
+                ->editColumn('proposal_sender_notelp', function ($row) {
+                    return $row->proposal_sender_notelp == '' ? '-' : $this->formatNomor($row->proposal_sender_notelp);
                 })
-                ->rawColumns(['action', 'notelp', 'alamat', 'sent_date'])->make(true);
+                ->editColumn('proposal_recipient_notelp', function ($row) {
+                    return $row->proposal_recipient_notelp == '' ? '-' : $this->formatNomor($row->proposal_recipient_notelp);
+                })
+                ->editColumn('proposal_amount_received', function ($row) {
+                    return $row->proposal_amount_received == '' ? '-' : $this->formatRupiah($row->proposal_amount_received);
+                })
+                ->rawColumns(['action', 'rnotelp', 'alamat', 'sent-date', 'resp_date'])->make(true);
         }
     }
 

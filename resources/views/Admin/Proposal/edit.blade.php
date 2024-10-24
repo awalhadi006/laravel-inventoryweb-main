@@ -18,7 +18,8 @@
                 </div>
                 <div class="form-group">
                     <label for="snotelpU" class="form-label">No Telp</label>
-                    <input type="text" name="snotelpU" class="form-control" placeholder="">
+                    <input type="text" name="snotelpU" class="form-control" data-mask="0000-0000-00000"
+                        placeholder="">
                 </div>
                 <div class="form-group">
                     <label for="sentdateU" class="form-label">Tanggal Dikirim</label>
@@ -34,7 +35,8 @@
                 </div>
                 <div class="form-group">
                     <label for="rnotelpU" class="form-label">No Telp</label>
-                    <input type="text" name="rnotelpU" class="form-control" placeholder="">
+                    <input type="text" name="rnotelpU" class="form-control" data-mask="0000-0000-00000"
+                        placeholder="">
                 </div>
                 <div class="form-group">
                     <label for="statusU" class="form-label">Status</label>
@@ -104,13 +106,13 @@
             const id = $("input[name='idproposalU']").val();
             const proposal = $("input[name='proposalU']").val();
             const sender = $("input[name='senderU']").val();
-            const snotelp = $("input[name='snotelpU']").val();
+            const snotelp = $("input[name='snotelpU']").val().replace(/\-/g, '');
             const sentdate = $("input[name='sentdateU']").val();
             const recipient = $("input[name='recipientU']").val();
             const address = $("textarea[name='addressU']").val();
-            const rnotelp = $("input[name='rnotelpU']").val();
-            const status = $("input[name='statusU']").val();
-            const response = $("input[name='responseU']").val();
+            const rnotelp = $("input[name='rnotelpU']").val().replace(/\-/g, '');
+            const status = $("select[name='statusU']").val();
+            const response = $("select[name='responseU']").val();
             const responsedate = $("input[name='responsedateU']").val();
             const amount = $("input[name='amountU']").val().replace(/\./g, '');
             const notes = $("textarea[name='notesU']").val();

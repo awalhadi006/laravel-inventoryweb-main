@@ -92,6 +92,8 @@ $appreance = AppreanceModel::where('user_id', '=', Session::get('user')->user_id
             background-color: #777 !important;
         }
     </style>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.mask/1.14.16/jquery.mask.min.js"></script>
 </head>
 
 @if ($appreance != '')
