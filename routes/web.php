@@ -5,6 +5,7 @@ use App\Http\Controllers\Admin\BarangkeluarController;
 use App\Http\Controllers\Admin\BarangmasukController;
 use App\Http\Controllers\Admin\CustomerController;
 use App\Http\Controllers\Admin\DashboardController;
+use App\Http\Controllers\Admin\DonasiController;
 use App\Http\Controllers\Admin\JenisBarangController;
 use App\Http\Controllers\Admin\LapBarangKeluarController;
 use App\Http\Controllers\Admin\LapBarangMasukController;
@@ -106,6 +107,15 @@ Route::group(['middleware' => 'userlogin'], function () {
         Route::post('/admin/proposal/proses_tambah/', [ProposalController::class, 'proses_tambah'])->name('proposal.store');
         Route::post('/admin/proposal/proses_ubah/{proposal}', [ProposalController::class, 'proses_ubah']);
         Route::post('/admin/proposal/proses_hapus/{proposal}', [ProposalController::class, 'proses_hapus']);
+    });
+
+    Route::middleware(['checkRoleUser:/donasi,menu'])->group(function () {
+        // Donasi
+        Route::resource('/admin/donasi', DonasiController::class);
+        Route::get('/admin/donasi/show/', [DonasiController::class, 'show'])->name('donasi.getdonasi');
+        Route::post('/admin/donasi/proses_tambah/', [DonasiController::class, 'proses_tambah'])->name('donasi.store');
+        Route::post('/admin/donasi/proses_ubah/{donasi}', [DonasiController::class, 'proses_ubah']);
+        Route::post('/admin/donasi/proses_hapus/{donasi}', [DonasiController::class, 'proses_hapus']);
     });
 
     Route::middleware(['checkRoleUser:/barang-masuk,submenu'])->group(function () {

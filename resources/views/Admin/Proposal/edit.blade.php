@@ -30,7 +30,7 @@
                 </div>
                 <div class="form-group">
                     <label for="addressU" class="form-label">Alamat</label>
-                    <input type="text" name="addressU" class="form-control" placeholder="">
+                    <textarea name="addressU" class="form-control" rows="4"></textarea>
                 </div>
                 <div class="form-group">
                     <label for="rnotelpU" class="form-label">No Telp</label>
@@ -60,8 +60,9 @@
                     <input type="date" name="responsedateU" class="form-control">
                 </div>
                 <div class="form-group">
-                    <label for="amountU" class="form-label">Jumlah Uang</label>
-                    <input type="text" name="amountU" class="form-control" placeholder="">
+                    <label for="amountU" class="form-label">Jumlah Donasi</label>
+                    <input type="text" name="amountU" class="form-control" data-mask="#.##0" data-mask-reverse="true"
+                        placeholder="">
                 </div>
                 <div class="form-group">
                     <label for="notesU" class="form-label">Catatan</label>
@@ -85,11 +86,11 @@
 @section('formEditJS')
     <script>
         function checkFormU() {
-            const customer = $("input[name='proposalU']").val();
+            const proposal = $("input[name='proposalU']").val();
             setLoadingU(true);
             resetValidU();
 
-            if (customer == "") {
+            if (proposal == "") {
                 validasi('Nama Proposal wajib di isi!', 'warning');
                 $("input[name='proposalU']").addClass('is-invalid');
                 setLoadingU(false);
@@ -111,8 +112,8 @@
             const status = $("input[name='statusU']").val();
             const response = $("input[name='responseU']").val();
             const responsedate = $("input[name='responsedateU']").val();
-            const amount = $("input[name='amountU']").val();
-            const notes = $("input[name='notesU']").val();
+            const amount = $("input[name='amountU']").val().replace(/\./g, '');
+            const notes = $("textarea[name='notesU']").val();
 
             $.ajax({
                 type: 'POST',
@@ -159,11 +160,11 @@
             $("input[name='recipientU']").val('');
             $("textarea[name='addressU']").val('');
             $("input[name='rnotelpU']").val('');
-            $("input[name='statusU']").val('');
-            $("input[name='responseU']").val('');
+            $("select[name='statusU']").val('');
+            $("select[name='responseU']").val('');
             $("input[name='responsedateU']").val('');
             $("input[name='amountU']").val('');
-            $("input[name='notesU']").val('');
+            $("textarea[name='notesU']").val('');
             setLoadingU(false);
         }
 

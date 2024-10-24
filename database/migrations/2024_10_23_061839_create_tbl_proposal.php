@@ -23,10 +23,10 @@ return new class extends Migration
             $table->string('proposal_recipient_name', 50)->nullable();
             $table->string('proposal_recipient_address', 100)->nullable();
             $table->string('proposal_recipient_notelp', 13)->nullable();
-            $table->enum('proposal_status', ['pribadi', 'masjid', 'majelis', 'yayasan'])->nullable();
-            $table->enum('proposal_response', ['menunggu', 'diterima', 'ditolak'])->nullable();
+            $table->enum('proposal_status', ['Pribadi', 'Masjid', 'Majelis Ta`lim', 'Yayasan'])->nullable();
+            $table->enum('proposal_response', ['Menunggu', 'Diterima', 'Ditolak'])->nullable();
             $table->date('proposal_response_date')->nullable();
-            $table->decimal('proposal_amount_received', 15, 2)->nullable();
+            $table->bigInteger('proposal_amount_received')->nullable();
             $table->text('proposal_notes')->nullable();
             $table->timestamps();
         });

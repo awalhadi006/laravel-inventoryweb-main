@@ -5,12 +5,15 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use App\Models\Admin\AksesModel;
 use App\Models\Admin\ProposalModel;
+use App\Traits\HasFormatRupiah;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Session;
 use Yajra\DataTables\Facades\DataTables;
 
 class ProposalController extends Controller
 {
+    use HasFormatRupiah;
     public function index()
     {
         $data["title"] = "Proposal";
@@ -33,6 +36,16 @@ class ProposalController extends Controller
                     $alamat = $row->proposal_recipient_address == '' ? '-' : $row->proposal_recipient_address;
 
                     return $alamat;
+                })
+                ->addColumn('proposal_sent_date', function ($row) {
+                    $sent_date = $row->proposal_sent_date == '' ? '-' : Carbon::parse($row->proposal_sent_date)->translatedFormat('d F Y');
+
+                    return $sent_date;
+                })
+                ->addColumn('proposal_response_date', function ($row) {
+                    $resp_date = $row->proposal_response_date == '' ? '-' : Carbon::parse($row->proposal_response_date)->translatedFormat('d F Y');
+
+                    return $resp_date;
                 })
                 ->addColumn('action', function ($row) {
                     $array = array(
@@ -77,7 +90,10 @@ class ProposalController extends Controller
                     }
                     return $button;
                 })
-                ->rawColumns(['action', 'notelp', 'alamat'])->make(true);
+                ->editColumn('proposal_amount_received', function ($row) {
+                    return $this->formatRupiah($row->proposal_amount_received);
+                })
+                ->rawColumns(['action', 'notelp', 'alamat', 'sent_date'])->make(true);
         }
     }
 

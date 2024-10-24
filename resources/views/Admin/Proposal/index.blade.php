@@ -69,7 +69,7 @@
             $("input[name='snotelpU']").val(data.proposal_sender_notelp);
             $("input[name='sentdateU']").val(data.proposal_sent_date);
             $("input[name='recipientU']").val(data.proposal_recipient_name.replace(/_/g, ' '));
-            $("input[name='addressU']").val(data.proposal_recipient_address.replace(/_/g, ' '));
+            $("textarea[name='addressU']").val(data.proposal_recipient_address.replace(/_/g, ' '));
             $("input[name='rnotelpU']").val(data.proposal_recipient_notelp);
             $("select[name='statusU']").val(data.proposal_status.replace(/_/g, ' '));
             $("select[name='responseU']").val(data.proposal_response.replace(/_/g, ' '));
@@ -103,6 +103,10 @@
 
         var table;
         $(document).ready(function() {
+            $('.rupiah').mask("#.##0", {
+                reverse: true
+            });
+
             //datatables
             table = $('#table-1').DataTable({
 
