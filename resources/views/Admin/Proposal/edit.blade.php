@@ -1,6 +1,6 @@
 <!-- MODAL EDIT -->
 <div class="modal fade" data-bs-backdrop="static" id="Umodaldemo8">
-    <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-dialog modal-lg modal-dialog-centered" role="document">
         <div class="modal-content modal-content-demo">
             <div class="modal-header">
                 <h6 class="modal-title">Ubah Proposal</h6><button aria-label="Close" class="btn-close"
@@ -8,47 +8,54 @@
             </div>
             <div class="modal-body">
                 <input type="hidden" name="idproposalU">
-                <div class="form-group">
-                    <label for="proposalU" class="form-label">Jenis Proposal<span class="text-danger">*</span></label>
-                    <input type="text" name="proposalU" class="form-control" placeholder="">
+                <div class="row">
+                    <div class="col-md-6" style="padding-right: 15px; border-right: 2px solid rgba(0, 0, 0, 0.5);">
+                        <div class="form-group">
+                            <label for="proposalU" class="form-label">Jenis Proposal<span
+                                    class="text-danger">*</span></label>
+                            <input type="text" name="proposalU" class="form-control" placeholder="">
+                        </div>
+                        <div class="form-group">
+                            <label for="senderU" class="form-label">Nama Pengirim</label>
+                            <input type="text" name="senderU" class="form-control" placeholder="">
+                        </div>
+                        <div class="form-group">
+                            <label for="snotelpU" class="form-label">No Telp</label>
+                            <input type="text" name="snotelpU" class="form-control" data-mask="0000-0000-00000"
+                                placeholder="">
+                        </div>
+                        <div class="form-group">
+                            <label for="sentdateU" class="form-label">Tanggal Dikirim</label>
+                            <input type="text" name="sentdateU" class="form-control datepicker-date" placeholder="">
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label for="recipientU" class="form-label">Nama Penerima</label>
+                            <input type="text" name="recipientU" class="form-control" placeholder="">
+                        </div>
+                        <div class="form-group">
+                            <label for="addressU" class="form-label">Alamat</label>
+                            <textarea name="addressU" class="form-control" rows="4"></textarea>
+                        </div>
+                        <div class="form-group">
+                            <label for="rnotelpU" class="form-label">No Telp</label>
+                            <input type="text" name="rnotelpU" class="form-control" data-mask="0000-0000-00000"
+                                placeholder="">
+                        </div>
+                        <div class="form-group">
+                            <label for="statusU" class="form-label">Status</label>
+                            <select name="statusU" class="form-control">
+                                <option value="">Pilih Status</option>
+                                <option value="pribadi">Pribadi</option>
+                                <option value="masjid">Masjid</option>
+                                <option value="majels">Majels</option>
+                                <option value="yayasan">Yayasan</option>
+                            </select>
+                        </div>
+                    </div>
                 </div>
-                <div class="form-group">
-                    <label for="senderU" class="form-label">Nama Pengirim</label>
-                    <input type="text" name="senderU" class="form-control" placeholder="">
-                </div>
-                <div class="form-group">
-                    <label for="snotelpU" class="form-label">No Telp</label>
-                    <input type="text" name="snotelpU" class="form-control" data-mask="0000-0000-00000"
-                        placeholder="">
-                </div>
-                <div class="form-group">
-                    <label for="sentdateU" class="form-label">Tanggal Dikirim</label>
-                    <input type="date" name="sentdateU" class="form-control">
-                </div>
-                <div class="form-group">
-                    <label for="recipientU" class="form-label">Nama Penerima</label>
-                    <input type="text" name="recipientU" class="form-control" placeholder="">
-                </div>
-                <div class="form-group">
-                    <label for="addressU" class="form-label">Alamat</label>
-                    <textarea name="addressU" class="form-control" rows="4"></textarea>
-                </div>
-                <div class="form-group">
-                    <label for="rnotelpU" class="form-label">No Telp</label>
-                    <input type="text" name="rnotelpU" class="form-control" data-mask="0000-0000-00000"
-                        placeholder="">
-                </div>
-                <div class="form-group">
-                    <label for="statusU" class="form-label">Status</label>
-                    <select name="statusU" class="form-control">
-                        <option value="">Pilih Status</option>
-                        <option value="pribadi">Pribadi</option>
-                        <option value="masjid">Masjid</option>
-                        <option value="majels">Majels</option>
-                        <option value="yayasan">Yayasan</option>
-                    </select>
-                </div>
-                <div class="form-group">
+                <div class="form-group" style="border-top: 2px solid rgba(0, 0, 0, 0.5);">
                     <label for="responseU" class="form-label">Respon</label>
                     <select name="responseU" class="form-control">
                         <option value="">Pilih Respon</option>
@@ -59,12 +66,12 @@
                 </div>
                 <div class="form-group">
                     <label for="responsedateU" class="form-label">Tanggal Respon</label>
-                    <input type="date" name="responsedateU" class="form-control">
+                    <input type="text" name="responsedateU" class="form-control datepicker-date">
                 </div>
                 <div class="form-group">
                     <label for="amountU" class="form-label">Jumlah Donasi</label>
-                    <input type="text" name="amountU" class="form-control" data-mask="#.##0" data-mask-reverse="true"
-                        placeholder="">
+                    <input type="text" name="amountU" class="form-control" data-mask="#.##0"
+                        data-mask-reverse="true" placeholder="">
                 </div>
                 <div class="form-group">
                     <label for="notesU" class="form-label">Catatan</label>

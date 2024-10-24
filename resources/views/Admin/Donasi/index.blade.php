@@ -66,6 +66,11 @@
             $("input[name='tanggalU']").val(data.donasi_tanggal);
             $("select[name='keteranganU']").val(data.donasi_keterangan.replace(/_/g, ' '));
             $("input[name='jumlahU']").val(data.donasi_jumlah);
+
+            $("input[name='tanggalU").bootstrapdatepicker({
+                format: 'yyyy-mm-dd',
+                autoclose: true
+            }).bootstrapdatepicker("update", data.donasi_tanggal);
         }
 
         function hapus(data) {

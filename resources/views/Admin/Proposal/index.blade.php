@@ -37,7 +37,7 @@
                                 <th class="border-bottom-0">Jenis Proposal</th>
                                 <th class="border-bottom-0">Nama Pengirim</th>
                                 <th class="border-bottom-0">No. Telp</th>
-                                <th class="border-bottom-0">Tanggal Dikirim</th>
+                                <th class="border-bottom-0">Tanggal Diambil</th>
                                 <th class="border-bottom-0">Nama Penerima</th>
                                 <th class="border-bottom-0">Alamat</th>
                                 <th class="border-bottom-0">No. Telp</th>
@@ -76,6 +76,16 @@
             $("input[name='responsedateU']").val(data.proposal_response_date);
             $("input[name='amountU']").val(data.proposal_amount_received);
             $("textarea[name='notesU']").val(data.proposal_notes.replace(/_/g, ' '));
+
+            $("input[name='sentdateU").bootstrapdatepicker({
+                format: 'yyyy-mm-dd',
+                autoclose: true
+            }).bootstrapdatepicker("update", data.proposal_sent_date);
+
+            $("input[name='responsedateU").bootstrapdatepicker({
+                format: 'yyyy-mm-dd',
+                autoclose: true
+            }).bootstrapdatepicker("update", data.proposal_response_date);
         }
 
         function hapus(data) {
