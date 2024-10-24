@@ -34,14 +34,14 @@
                             class="table table-bordered text-nowrap border-bottom dataTable no-footer dtr-inline collapsed">
                             <thead>
                                 <th class="border-bottom-0" width="1%">No</th>
-                                <th class="border-bottom-0">Nama Penanggung Jawab</th>
+                                <th class="border-bottom-0">Nama PIC</th>
                                 <th class="border-bottom-0">Nama Anggota</th>
                                 <th class="border-bottom-0">Lokasi</th>
                                 <th class="border-bottom-0">Alamat</th>
                                 <th class="border-bottom-0">Tanggal Pelaksanaan</th>
                                 <th class="border-bottom-0">Keterangan</th>
                                 <th class="border-bottom-0">Jumlah Donasi</th>
-                                <th class="border-bottom-0" width="1%">Action</th>
+                                <th class="border-bottom-0" width="1%">Aksi</th>
                             </thead>
                             <tbody></tbody>
                         </table>
@@ -60,7 +60,7 @@
         function update(data) {
             $("input[name='iddonasiU']").val(data.donasi_id);
             $("input[name='donasiU']").val(data.donasi_pj.replace(/_/g, ' '));
-            $("textarea[name='anggotaU']").val(data.donasi_anggota.replace(/_/g, ' '));
+            $("textarea[name='anggotaU']").val(data.donasi_anggota.replace(/_/g, ' ').replace(/\\n/g, '\n'));
             $("input[name='lokasiU']").val(data.donasi_lokasi.replace(/_/g, ' '));
             $("input[name='alamatU']").val(data.donasi_alamat.replace(/_/g, ' '));
             $("input[name='tanggalU']").val(data.donasi_tanggal);

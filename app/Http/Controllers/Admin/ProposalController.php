@@ -29,15 +29,21 @@ class ProposalController extends Controller
             $data = ProposalModel::orderBy('proposal_id', 'DESC')->get();
             return DataTables::of($data)
                 ->addIndexColumn()
-                ->addColumn('proposal_recipient_notelp', function ($row) {
-                    $rnotelp = $row->proposal_recipient_notelp == '' ? '-' : $row->proposal_recipient_notelp;
+                ->addColumn('proposal_recipient_name', function ($row) {
+                    $recip_name = $row->proposal_recipient_name == '' ? '-' : $row->proposal_recipient_name;
 
-                    return $rnotelp;
+                    return $recip_name;
                 })
-                ->addColumn('alamat', function ($row) {
+                ->addColumn('proposal_recipient_address', function ($row) {
                     $alamat = $row->proposal_recipient_address == '' ? '-' : $row->proposal_recipient_address;
 
                     return $alamat;
+                })
+
+                ->addColumn('proposal_status', function ($row) {
+                    $status = $row->proposal_status == '' ? '-' : $row->proposal_status;
+
+                    return $status;
                 })
 
                 ->addColumn('proposal_sent_date', function ($row) {
@@ -52,21 +58,27 @@ class ProposalController extends Controller
                     return $resp_date;
                 })
 
+                ->addColumn('proposal_notes', function ($row) {
+                    $notes = $row->proposal_notes == '' ? '-' : $row->proposal_notes;
+
+                    return $notes;
+                })
+
                 ->addColumn('action', function ($row) {
                     $array = array(
                         "proposal_id" => $row->proposal_id,
-                        "proposal_name" => trim(preg_replace('/[^A-Za-z0-9-]+/', '_', $row->proposal_name)),
-                        "proposal_sender" => trim(preg_replace('/[^A-Za-z0-9-]+/', '_', $row->proposal_sender)),
+                        "proposal_name" => trim(preg_replace('/[^A-Za-z0-9-.]+/', '_', $row->proposal_name)),
+                        "proposal_sender" => trim(preg_replace('/[^A-Za-z0-9-.]+/', '_', $row->proposal_sender)),
                         "proposal_sender_notelp" => $row->proposal_sender_notelp,
                         "proposal_sent_date" => $row->proposal_sent_date,
-                        "proposal_recipient_name" => trim(preg_replace('/[^A-Za-z0-9-]+/', '_', $row->proposal_recipient_name)),
-                        "proposal_recipient_address" => trim(preg_replace('/[^A-Za-z0-9-]+/', '_', $row->proposal_recipient_address)),
+                        "proposal_recipient_name" => trim(preg_replace('/[^A-Za-z0-9-.]+/', '_', $row->proposal_recipient_name)),
+                        "proposal_recipient_address" => trim(preg_replace('/[^A-Za-z0-9-.]+/', '_', $row->proposal_recipient_address)),
                         "proposal_recipient_notelp" => $row->proposal_recipient_notelp,
                         "proposal_status" => trim(preg_replace('/[^A-Za-z0-9-]+/', '_', $row->proposal_status)),
                         "proposal_response" => trim(preg_replace('/[^A-Za-z0-9-]+/', '_', $row->proposal_response)),
                         "proposal_response_date" => $row->proposal_response_date,
                         "proposal_amount_received" => $row->proposal_amount_received,
-                        "proposal_notes" => trim(preg_replace('/[^A-Za-z0-9-]+/', '_', $row->proposal_notes)),
+                        "proposal_notes" => trim(preg_replace('/[^A-Za-z0-9-.]+/', '_', $row->proposal_notes)),
                     );
                     $button = '';
                     $hakEdit = AksesModel::leftJoin('tbl_menu', 'tbl_menu.menu_id', '=', 'tbl_akses.menu_id')->where(array('tbl_akses.role_id' => Session::get('user')->role_id, 'tbl_menu.menu_judul' => 'Proposal', 'tbl_akses.akses_type' => 'update'))->count();
@@ -104,7 +116,7 @@ class ProposalController extends Controller
                 ->editColumn('proposal_amount_received', function ($row) {
                     return $row->proposal_amount_received == '' ? '-' : $this->formatRupiah($row->proposal_amount_received);
                 })
-                ->rawColumns(['action', 'rnotelp', 'alamat', 'sent-date', 'resp_date'])->make(true);
+                ->rawColumns(['action', 'recip_name', 'alamat', 'status', 'sent_date', 'resp_date', 'notes'])->make(true);
         }
     }
 

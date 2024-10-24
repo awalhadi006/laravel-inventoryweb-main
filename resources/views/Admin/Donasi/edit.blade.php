@@ -33,13 +33,14 @@
                     <label for="keteranganU" class="form-label">Keterangan</label>
                     <select name="keteranganU" class="form-control">
                         <option value="">Pilih Keterangan</option>
-                        <option value="sudah">Sudah Dikonfirmasi</option>
-                        <option value="belum">Belum Dikonfirmasi</option>
+                        <option value="Belum terlaksana">Belum terlaksana</option>
+                        <option value="Sudah terlaksana">Sudah terlaksana</option>
                     </select>
                 </div>
                 <div class="form-group">
                     <label for="jumlahU" class="form-label">Jumlah Donasi</label>
-                    <input type="text" name="jumlahU" class="form-control">
+                    <input type="text" name="jumlahU" class="form-control" data-mask="#.##0"
+                        data-mask-reverse="true">
                 </div>
             </div>
             <div class="modal-footer">
@@ -76,12 +77,12 @@
         function submitFormU() {
             const id = $("input[name='iddonasiU']").val();
             const donasi = $("input[name='donasiU']").val();
-            const anggota = $("textarea[name='anggotaU']").val();
+            const anggota = $("textarea[name='anggotaU']").val().replace(/\n/g, '\n');
             const lokasi = $("input[name='lokasiU']").val();
             const alamat = $("input[name='alamatU']").val();
             const tanggal = $("input[name='tanggalU']").val();
             const keterangan = $("select[name='keteranganU']").val();
-            const jumlah = $("input[name='jumlahU']").val();
+            const jumlah = $("input[name='jumlahU']").val().replace(/\./g, '');
 
             $.ajax({
                 type: 'POST',

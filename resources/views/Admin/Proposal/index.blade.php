@@ -102,95 +102,87 @@
         });
 
         var table;
-        $(document).ready(function() {
-            $('.phone_us').mask('(000) 000-0000');
+        //datatables
+        table = $('#table-1').DataTable({
 
-            //datatables
-            table = $('#table-1').DataTable({
+            "processing": true,
+            "serverSide": true,
+            "info": true,
+            "order": [],
+            "stateSave": true,
+            "lengthMenu": [
+                [5, 10, 25, 50, 100],
+                [5, 10, 25, 50, 100]
+            ],
+            "pageLength": 10,
 
-                "processing": true,
-                "serverSide": true,
-                "info": true,
-                "order": [],
-                "stateSave": true,
-                "lengthMenu": [
-                    [5, 10, 25, 50, 100],
-                    [5, 10, 25, 50, 100]
-                ],
-                "pageLength": 10,
+            lengthChange: true,
 
-                lengthChange: true,
+            "ajax": {
+                "url": "{{ route('proposal.getproposal') }}",
+            },
 
-                "ajax": {
-                    "url": "{{ route('proposal.getproposal') }}",
+            "columns": [{
+                    data: 'DT_RowIndex',
+                    name: 'DT_RowIndex',
+                    searchable: false
                 },
+                {
+                    data: 'proposal_name',
+                    name: 'proposal_name',
+                },
+                {
+                    data: 'proposal_sender',
+                    name: 'proposal_sender',
+                },
+                {
+                    data: 'proposal_sender_notelp',
+                    name: 'proposal_sender_notelp',
+                },
+                {
+                    data: 'proposal_sent_date',
+                    name: 'proposal_sent_date',
+                },
+                {
+                    data: 'proposal_recipient_name',
+                    name: 'proposal_recipient_name',
+                },
+                {
+                    data: 'proposal_recipient_address',
+                    name: 'proposal_recipient_address',
+                },
+                {
+                    data: 'proposal_recipient_notelp',
+                    name: 'proposal_recipient_notelp',
+                },
+                {
+                    data: 'proposal_status',
+                    name: 'proposal_status',
+                },
+                {
+                    data: 'proposal_response',
+                    name: 'proposal_response',
+                },
+                {
+                    data: 'proposal_response_date',
+                    name: 'proposal_response_date',
+                },
+                {
+                    data: 'proposal_amount_received',
+                    name: 'proposal_amount_received',
+                },
+                {
+                    data: 'proposal_notes',
+                    name: 'proposal_notes',
+                },
+                {
+                    data: 'action',
+                    name: 'action',
+                    orderable: false,
+                    searchable: false
+                },
+            ],
 
-                "columns": [{
-                        data: 'DT_RowIndex',
-                        name: 'DT_RowIndex',
-                        searchable: false
-                    },
-                    {
-                        data: 'proposal_name',
-                        name: 'proposal_name',
-                    },
-                    {
-                        data: 'proposal_sender',
-                        name: 'proposal_sender',
-                    },
-                    {
-                        data: 'proposal_sender_notelp',
-                        name: 'proposal_sender_notelp',
-                    },
-                    {
-                        data: 'proposal_sent_date',
-                        name: 'proposal_sent_date',
-                    },
-                    {
-                        data: 'proposal_recipient_name',
-                        name: 'proposal_recipient_name',
-                    },
-                    {
-                        data: 'proposal_recipient_address',
-                        name: 'proposal_recipient_address',
-                    },
-                    {
-                        data: 'proposal_recipient_notelp',
-                        name: 'proposal_recipient_notelp',
-                    },
-                    {
-                        data: 'proposal_status',
-                        name: 'proposal_status',
-                    },
-                    {
-                        data: 'proposal_response',
-                        name: 'proposal_response',
-                    },
-                    {
-                        data: 'proposal_response_date',
-                        name: 'proposal_response_date',
-                    },
-                    {
-                        data: 'proposal_amount_received',
-                        name: 'proposal_amount_received',
-                    },
-                    {
-                        data: 'proposal_notes',
-                        name: 'proposal_notes',
-                    },
-                    {
-                        data: 'action',
-                        name: 'action',
-                        orderable: false,
-                        searchable: false
-                    },
-                ],
-
-                "drawCallback": function(settings) {
-                    $('.phone_us').mask('(000) 000-0000');
-                }
-
-            });
         });
     </script>
 @endsection

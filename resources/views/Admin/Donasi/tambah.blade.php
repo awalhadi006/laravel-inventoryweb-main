@@ -32,13 +32,14 @@
                     <label for="keterangan" class="form-label">Keterangan</label>
                     <select name="keterangan" class="form-control">
                         <option value="">Pilih Keterangan</option>
-                        <option value="sudah">Sudah terlaksana</option>
-                        <option value="sudah">Belum terlaksana</option>
+                        <option value="Belum terlaksana">Belum terlaksana</option>
+                        <option value="Sudah terlaksana">Sudah terlaksana</option>
                     </select>
                 </div>
                 <div class="form-group">
                     <label for="jumlah" class="form-label">Jumlah Donasi</label>
-                    <input type="text" name="jumlah" class="form-control" placeholder="">
+                    <input type="text" name="jumlah" class="form-control" data-mask="#.##0" data-mask-reverse="true"
+                        placeholder="">
                 </div>
             </div>
             <div class="modal-footer">
@@ -81,7 +82,7 @@
             const alamat = $("input[name='alamat']").val();
             const tanggal = $("input[name='tanggal']").val();
             const keterangan = $("select[name='keterangan']").val();
-            const jumlah = $("input[name='jumlah']").val();
+            const jumlah = $("input[name='jumlah']").val().replace(/\./g, '');
 
             $.ajax({
                 type: 'POST',

@@ -5,12 +5,18 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use App\Models\Admin\AksesModel;
 use App\Models\Admin\DonasiModel;
+use App\Traits\HasFormatNomor;
+use App\Traits\HasFormatRupiah;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Session;
 use Yajra\DataTables\Facades\DataTables;
 
 class DonasiController extends Controller
 {
+    use HasFormatRupiah;
+    use HasFormatNomor;
+
     public function index()
     {
         $data["title"] = "Galang Dana";
@@ -24,15 +30,20 @@ class DonasiController extends Controller
             $data = DonasiModel::orderBy('donasi_id', 'DESC')->get();
             return DataTables::of($data)
                 ->addIndexColumn()
+                ->addColumn('donasi_tanggal', function ($row) {
+                    $tanggal = $row->donasi_tanggal == '' ? '-' : Carbon::parse($row->donasi_tanggal)->translatedFormat('d F Y');
+
+                    return $tanggal;
+                })
                 ->addColumn('action', function ($row) {
                     $array = array(
                         "donasi_id" => $row->donasi_id,
-                        "donasi_pj" => trim(preg_replace('/[^A-Za-z0-9-]+/', '_', $row->donasi_pj)),
-                        "donasi_anggota" => trim(preg_replace('/[^A-Za-z0-9-]+/', '_', $row->donasi_anggota)),
-                        "donasi_lokasi" => trim(preg_replace('/[^A-Za-z0-9-]+/', '_', $row->donasi_lokasi)),
-                        "donasi_alamat" => trim(preg_replace('/[^A-Za-z0-9-]+/', '_', $row->donasi_alamat)),
+                        "donasi_pj" => trim(preg_replace('/[^A-Za-z0-9-.]+/', '_', $row->donasi_pj)),
+                        "donasi_anggota" => trim(preg_replace('/[^A-Za-z0-9-.]+/', '_', $row->donasi_anggota)),
+                        "donasi_lokasi" => trim(preg_replace('/[^A-Za-z0-9-.]+/', '_', $row->donasi_lokasi)),
+                        "donasi_alamat" => trim(preg_replace('/[^A-Za-z0-9-.]+/', '_', $row->donasi_alamat)),
                         "donasi_tanggal" => $row->donasi_tanggal,
-                        "donasi_keterangan" => trim(preg_replace('/[^A-Za-z0-9-]+/', '_', $row->donasi_keterangan)),
+                        "donasi_keterangan" => trim(preg_replace('/[^A-Za-z0-9-.]+/', '_', $row->donasi_keterangan)),
                         "donasi_jumlah" => $row->donasi_jumlah,
                     );
                     $button = '';
@@ -62,6 +73,11 @@ class DonasiController extends Controller
                     }
                     return $button;
                 })
+
+                ->editColumn('donasi_jumlah', function ($row) {
+                    return $row->donasi_jumlah == '' ? '-' : $this->formatRupiah($row->donasi_jumlah);
+                })
+
                 ->rawColumns(['action'])->make(true);
         }
     }
