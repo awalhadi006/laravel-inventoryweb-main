@@ -14,20 +14,22 @@
                     <input type="text" name="donasiU" class="form-control" placeholder="">
                 </div>
                 <div class="form-group">
-                    <label for="anggotaU" class="form-label">Nama Anggota</label>
+                    <label for="anggotaU" class="form-label">Nama Anggota<span class="text-danger">*</span></label>
                     <textarea name="anggotaU" class="form-control" rows="4"></textarea>
                 </div>
                 <div class="form-group">
-                    <label for="lokasiU" class="form-label">Lokasi Galang Dana</label>
+                    <label for="lokasiU" class="form-label">Lokasi Galang Dana<span
+                            class="text-danger">*</span></label>
                     <input type="text" name="lokasiU" class="form-control" placeholder="">
                 </div>
                 <div class="form-group">
-                    <label for="alamatU" class="form-label">Alamat</label>
+                    <label for="alamatU" class="form-label">Alamat<span class="text-danger">*</span></label>
                     <input type="text" name="alamatU" class="form-control">
                 </div>
                 <div class="form-group">
-                    <label for="tanggalU" class="form-label">Tanggal Pelaksanaan</label>
-                    <input type="date" name="tanggalU" class="form-control" placeholder="">
+                    <label for="tanggalU" class="form-label">Tanggal Pelaksanaan<span
+                            class="text-danger">*</span></label>
+                    <input type="text" name="tanggalU" class="form-control datepicker-date" placeholder="">
                 </div>
                 <div class="form-group">
                     <label for="keteranganU" class="form-label">Keterangan</label>
@@ -69,8 +71,32 @@
                 $("input[name='donasiU']").addClass('is-invalid');
                 setLoadingU(false);
                 return false;
+            }
+            if (anggota == "") {
+                validasi('Nama Anggota wajib diisi!', 'warning');
+                $("textarea[name='anggotaU']").addClass('is-invalid');
+                setLoading(false);
+                return false;
+            }
+            if (lokasi == "") {
+                validasi('Nama lokasi wajib diisi!', 'warning');
+                $("input[name='lokasiU']").addClass('is-invalid');
+                setLoading(false);
+                return false;
+            }
+            if (alamat == "") {
+                validasi('Alamat wajib diisi!', 'warning');
+                $("input[name='alamatU']").addClass('is-invalid');
+                setLoading(false);
+                return false;
+            }
+            if (tanggal == "") {
+                validasi('Tanggal wajib diisi!', 'warning');
+                $("input[name='tanggal']").addClass('is-invalid');
+                setLoading(false);
+                return false;
             } else {
-                submitFormU();
+                submitForm();
             }
         }
 

@@ -16,16 +16,18 @@
                             <input type="text" name="proposalU" class="form-control" placeholder="">
                         </div>
                         <div class="form-group">
-                            <label for="senderU" class="form-label">Nama Pengirim</label>
+                            <label for="senderU" class="form-label">Nama Pengirim<span
+                                    class="text-danger">*</span></label>
                             <input type="text" name="senderU" class="form-control" placeholder="">
                         </div>
                         <div class="form-group">
-                            <label for="snotelpU" class="form-label">No Telp</label>
+                            <label for="snotelpU" class="form-label">No Telp<span class="text-danger">*</span></label>
                             <input type="text" name="snotelpU" class="form-control" data-mask="0000-0000-00000"
                                 placeholder="">
                         </div>
                         <div class="form-group">
-                            <label for="sentdateU" class="form-label">Tanggal Dikirim</label>
+                            <label for="sentdateU" class="form-label">Tanggal Dikirim<span
+                                    class="text-danger">*</span></label>
                             <input type="text" name="sentdateU" class="form-control datepicker-date" placeholder="">
                         </div>
                     </div>
@@ -103,6 +105,24 @@
                 validasi('Nama Proposal wajib di isi!', 'warning');
                 $("input[name='proposalU']").addClass('is-invalid');
                 setLoadingU(false);
+                return false;
+            }
+            if (sender == "") {
+                validasi('Nama Pengirim wajib diisi!', 'warning');
+                $("input[name='senderU']").addClass('is-invalid');
+                setLoading(false);
+                return false;
+            }
+            if (snotelp == "") {
+                validasi('No Telp Pengirim wajib diisi!', 'warning');
+                $("input[name='snotelpU']").addClass('is-invalid');
+                setLoading(false);
+                return false;
+            }
+            if (sentdate == "") {
+                validasi('Tanggal Dikirim wajib diisi!', 'warning');
+                $("input[name='sentdateU']").addClass('is-invalid');
+                setLoading(false);
                 return false;
             } else {
                 submitFormU();

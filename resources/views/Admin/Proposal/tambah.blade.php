@@ -15,16 +15,18 @@
                             <input type="text" name="proposal" class="form-control" placeholder="">
                         </div>
                         <div class="form-group">
-                            <label for="sender" class="form-label">Nama Pengirim</label>
+                            <label for="sender" class="form-label">Nama Pengirim<span
+                                    class="text-danger">*</span></label>
                             <input type="text" name="sender" class="form-control" placeholder="">
                         </div>
                         <div class="form-group">
-                            <label for="snotelp" class="form-label">No Telp</label>
+                            <label for="snotelp" class="form-label">No Telp<span class="text-danger">*</span></label>
                             <input type="text" name="snotelp" class="form-control" data-mask="0000-0000-00000"
                                 placeholder="">
                         </div>
                         <div class="form-group">
-                            <label for="sentdate" class="form-label">Tanggal Dikirim</label>
+                            <label for="sentdate" class="form-label">Tanggal Dikirim<span
+                                    class="text-danger">*</span></label>
                             <input type="text" name="sentdate" class="form-control datepicker-date">
                         </div>
                     </div>
@@ -48,7 +50,7 @@
                                 <option value="">Pilih Status</option>
                                 <option value="pribadi">Pribadi</option>
                                 <option value="masjid">Masjid</option>
-                                <option value="majels">Majels</option>
+                                <option value="majelis">Majelis Ta'lim</option>
                                 <option value="yayasan">Yayasan</option>
                             </select>
                         </div>
@@ -102,6 +104,24 @@
             if (proposal == "") {
                 validasi('Nama Proposal wajib di isi!', 'warning');
                 $("input[name='proposal']").addClass('is-invalid');
+                setLoading(false);
+                return false;
+            }
+            if (sender == "") {
+                validasi('Nama Pengirim wajib diisi!', 'warning');
+                $("input[name='sender']").addClass('is-invalid');
+                setLoading(false);
+                return false;
+            }
+            if (snotelp == "") {
+                validasi('No Telp Pengirim wajib diisi!', 'warning');
+                $("input[name='snotelp']").addClass('is-invalid');
+                setLoading(false);
+                return false;
+            }
+            if (sentdate == "") {
+                validasi('Tanggal Dikirim wajib diisi!', 'warning');
+                $("input[name='sentdate']").addClass('is-invalid');
                 setLoading(false);
                 return false;
             } else {

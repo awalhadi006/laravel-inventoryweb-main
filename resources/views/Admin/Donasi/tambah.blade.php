@@ -13,20 +13,23 @@
                     <input type="text" name="donasi" class="form-control" placeholder="">
                 </div>
                 <div class="form-group">
-                    <label for="anggota" class="form-label">Nama Anggota</label>
+                    <label for="anggota" class="form-label">Nama Anggota<span class="text-danger">*</span></label>
                     <textarea name="anggota" class="form-control" rows="4"></textarea>
                 </div>
                 <div class="form-group">
-                    <label for="lokasi" class="form-label">Lokasi Galang Dana</label>
+                    <label for="lokasi" class="form-label">Lokasi Galang Dana<span
+                            class="text-danger">*</span></label>
                     <input type="text" name="lokasi" class="form-control" placeholder="">
                 </div>
                 <div class="form-group">
-                    <label for="alamat" class="form-label">Alamat Galang Donasi</label>
+                    <label for="alamat" class="form-label">Alamat Galang Donasi<span
+                            class="text-danger">*</span></label>
                     <input type="text" name="alamat" class="form-control">
                 </div>
                 <div class="form-group">
-                    <label for="tanggal" class="form-label">Tanggal Pelaksanaan</label>
-                    <input type="date" name="tanggal" class="form-control" placeholder="">
+                    <label for="tanggal" class="form-label">Tanggal Pelaksanaan<span
+                            class="text-danger">*</span></label>
+                    <input type="text" name="tanggal" class="form-control datepicker-date" placeholder="">
                 </div>
                 <div class="form-group">
                     <label for="keterangan" class="form-label">Keterangan</label>
@@ -65,8 +68,32 @@
             resetValid();
 
             if (donasi == "") {
-                validasi('Nama Penanggung Jawab wajib di isi!', 'warning');
+                validasi('Nama PIC wajib diisi!', 'warning');
                 $("input[name='donasi']").addClass('is-invalid');
+                setLoading(false);
+                return false;
+            }
+            if (anggota == "") {
+                validasi('Nama Anggota wajib diisi!', 'warning');
+                $("textarea[name='anggota']").addClass('is-invalid');
+                setLoading(false);
+                return false;
+            }
+            if (lokasi == "") {
+                validasi('Nama lokasi wajib diisi!', 'warning');
+                $("input[name='lokasi']").addClass('is-invalid');
+                setLoading(false);
+                return false;
+            }
+            if (alamat == "") {
+                validasi('Alamat wajib diisi!', 'warning');
+                $("input[name='alamat']").addClass('is-invalid');
+                setLoading(false);
+                return false;
+            }
+            if (tanggal == "") {
+                validasi('Tanggal wajib diisi!', 'warning');
+                $("input[name='tanggal']").addClass('is-invalid');
                 setLoading(false);
                 return false;
             } else {
